@@ -224,3 +224,42 @@ export function sample() {
   let a2: number = (someValue as string).length
 }
 ```
+
+# 型推論
+
+## ライブラリ
+
+`import` or `dynamic import`した場合でないと型推論が効かない。
+
+`require`では、推論が効かないので注意。
+
+## JSON
+
+`tsconfig.json`の以下設定を有効にすることで型推論が可能。
+
+```json
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "esModuleInterop": true                   /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
+  }
+}
+```
+
+```json
+{
+  "root": {
+    "id": 1,
+    "name": "sample1"
+  }
+}
+```
+
+```typescript
+import sample from './json/sample.json'
+
+console.log({
+  id: sample.root.id,
+  name: sample.root.name
+})
+```

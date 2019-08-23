@@ -1,3 +1,10 @@
+import sample from './json/sample.json'
+
+console.log({
+  id: sample.root.id,
+  name: sample.root.name
+})
+
 type Dog = {
   tail: 'tail',
   bark: () => void
