@@ -1,1 +1,1 @@
-TypeScriptのお勉強
+TypeScriptの勉強とかおためし
