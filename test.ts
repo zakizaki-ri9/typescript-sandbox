@@ -1,3 +1,3 @@
-export function test() {
-  return 'test'
+export function test(arg: String) {
+  return `test ${arg}`
 }

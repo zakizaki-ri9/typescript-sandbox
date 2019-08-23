@@ -53,3 +53,28 @@ tsc
     }
 }
 ```
+
+## 型チェック
+
+`tsconfig.json`の`strict`によって、型チェックが有効となる。
+
+```json
+{
+    "compilerOptions": {
+      "strict": true  /* Enable all strict type-checking options. */
+    }
+}
+```
+
+型の厳密さが固すぎる場合は、`strict: false`とする。
+
+また、`strict: true`で以下の設定が有効となる。
+
+- noImplictAny
+- noImpictThis
+- alwaysStrict
+- strictBindCallApply
+- strictNullChecks
+- strictFunctionTypes
+- strictPropertyInitialization
+
