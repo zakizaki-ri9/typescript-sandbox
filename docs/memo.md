@@ -27,4 +27,29 @@ TypeScriptのIntelliSenseは、`tsserver.js`を含むディレクトリを`setti
 
 TypeScriptのバージョンを変更したい場合は、上記パスを変更する。
 
+## `tsconfig.json`
 
+`tsconfig.json`の雛形を生成。
+
+```bash
+tsc --init
+```
+
+## トランスパイル
+
+`*.ts`を`*.js`にトランスパイルする。
+
+```bash
+tsc
+```
+
+`*.js`の出力形式は、`tsconfig.json`の以下で変化する。
+
+```json
+{
+    "compilerOptions": {
+      "target": "es5",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019' or 'ESNEXT'. */
+      "module": "commonjs",
+    }
+}
+```
