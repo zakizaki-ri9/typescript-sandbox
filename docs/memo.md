@@ -67,6 +67,21 @@ tsc
 }
 ```
 
+### JavaScriptファイルをトランスパイルに含む
+
+**JavaScriptからTypeScriptへ移行する場合**に、有効にすると良い。
+
+`tsconfig.json`の以下オプションを有効にする。
+
+```json
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true
+  }
+}
+```
+
 ## 型チェック
 
 `tsconfig.json`の`strict`によって、型チェックが有効となる。
@@ -130,4 +145,30 @@ export declare function test2(): {
     key: number;
     value: string;
 };
+```
+
+## 型定義を利用（参照）する
+
+TypeScriptの型定義のおおよそは、[DefinitelyTyped](https://definitelytyped.org/)に定義されている。
+
+デフォルトでは、`node_modules/@types`に含まれる全パッケージがコンパイル対象と見なされる。
+
+`tsconfig.json`の以下オプションでパスを指定した場合、**パス配下のパッケージのみ**がコンパイル対象となる。
+
+```json
+{
+  "compilerOptions": {
+    // "typeRoots": [],                       /* List of folders to include type definitions from. */
+  }
+}
+```
+
+以下のオプションを指定した場合は、`node_modules/@types/`配下の指定したパッケージのみが対象となる。
+
+```json
+{
+  "compilerOptions": {
+    "types": ["node", "lodash"]
+  }
+}
 ```
