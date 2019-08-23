@@ -91,3 +91,43 @@ tsc
 - strictFunctionTypes
 - strictPropertyInitialization
 
+## 型宣言ファイル
+
+`tsconfig.json`を以下設定とすることで、型定義（`*.d.ts`）を利用できる。
+
+主にライブラリ開発で、使用する側に型を通知するために使用する。
+
+```json
+{
+  "compilerOptions": {
+    "declaration": true
+  }
+}
+```
+
+### 出力例
+
+*test.ts*
+
+```typescript
+export function test1(arg: string) {
+  return `test ${arg}`
+}
+
+export function test2() {
+  return {
+    key: 1,
+    value: "sample"
+  }
+}
+```
+
+*test.d.ts*
+
+```typescript
+export declare function test1(arg: string): string;
+export declare function test2(): {
+    key: number;
+    value: string;
+};
+```
