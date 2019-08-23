@@ -35,7 +35,7 @@ TypeScriptのバージョンを変更したい場合は、上記パスを変更�
 tsc --init
 ```
 
-## トランスパイル
+## トランスパイル（ts→js）
 
 `*.ts`を`*.js`にトランスパイルする。
 
@@ -47,10 +47,23 @@ tsc
 
 ```json
 {
-    "compilerOptions": {
-      "target": "es5",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019' or 'ESNEXT'. */
-      "module": "commonjs",
-    }
+  "compilerOptions": {
+    "target": "es5",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019' or 'ESNEXT'. */
+    "module": "commonjs",
+  }
+}
+```
+
+また、`tsconfig.json`の以下でトランスパイルする`*.ts`のパス、`*.js`の出力先を変更することが可能。
+
+```json
+{
+  "compilerOptions": {
+    "outDir": "dist"
+  },
+  "include": [
+    "src/**/*"
+  ]
 }
 ```
 
@@ -60,9 +73,9 @@ tsc
 
 ```json
 {
-    "compilerOptions": {
-      "strict": true  /* Enable all strict type-checking options. */
-    }
+  "compilerOptions": {
+    "strict": true  /* Enable all strict type-checking options. */
+  }
 }
 ```
 
