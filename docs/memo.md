@@ -172,3 +172,55 @@ TypeScriptの型定義のおおよそは、[DefinitelyTyped](https://definitelyt
   }
 }
 ```
+
+# 型について
+
+## any型とunknown型
+
+any型は代入も利用（メソッド呼び出し）含めて無制限だが、unknown型は代入OK・利用NGという感じ。
+
+```typescript
+let aVal: any = 100
+let uVal: unknown = 200
+
+console.log(aVal.toString()) // OK
+console.log(uVal.toString()) // エラー
+```
+
+unknown型だったら〜みたいな処理分けをするような使い道。
+
+## Intersection（Types型の結合）
+
+TypeScriptでは型の結合が行える。
+
+```typescript
+type Dog = {
+  tail: 'tail',
+  bark: () => void
+}
+
+type Bird = {
+  wing: 'wing',
+  fly: () => void
+}
+
+type Kimera = Dog & Bird
+```
+
+## アサーション（個人的にはキャストの表現に近い）
+
+any型で宣言した変数に対して、アサーション（宣言を行うことができる。
+
+※アサーション＝過去の言語を経験した感じ、個人的にはキャストの表現に近い感じ。
+
+```typescript
+export function sample() {
+  let someValue: any = "this is a string"
+
+  // <type>でアサーション
+  let a1: number = (<string>someValue).length
+  
+  // asでアサーション
+  let a2: number = (someValue as string).length
+}
+```
