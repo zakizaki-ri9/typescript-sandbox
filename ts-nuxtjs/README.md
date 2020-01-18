@@ -7,7 +7,7 @@ TSで始めるNuxt.jsのおためし
 ## 導入手順
 
 ```bash
-npm i -D typescript @nuxt/typescript
+npm i -D typescript @nuxt/typescript-build
 npx tsc --init
 ```
 
@@ -15,42 +15,22 @@ npx tsc --init
 // tsconfig.json
 {
   "compilerOptions": {
-    "target": "ESNext" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019' or 'ESNEXT'. */,
-    "module": "ESNext" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */,
-    "lib": [
-      "ESNext",
-      "ESNext.AsyncIterable",
-      "DOM"
-    ] /* Specify library files to be included in the compilation. */,
-    "allowJs": true /* Allow javascript files to be compiled. */,
-    "jsx": "preserve" /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */,
-    "sourceMap": true /* Generates corresponding '.map' file. */,
-    "noEmit": true /* Do not emit outputs. */,
-    "strict": true /* Enable all strict type-checking options. */,
-    "noImplicitAny": true /* Raise error on expressions and declarations with an implied 'any' type. */,
-    "noUnusedLocals": true /* Report errors on unused locals. */,
-    "noUnusedParameters": true /* Report errors on unused parameters. */,
-    "moduleResolution": "node" /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */,
-    "baseUrl": "." /* Base directory to resolve non-absolute module names. */,
+    "target": "es2018",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": ["esnext", "esnext.asynciterable", "dom"],
+    "esModuleInterop": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "strict": true,
+    "noEmit": true,
+    "baseUrl": ".",
     "paths": {
       "~/*": ["./*"],
       "@/*": ["./*"]
-    } /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */,
-    "types": [
-      "@types/node",
-      "@types/vue-app"
-    ] /* Type declaration files to be included in compilation. */,
-    "esModuleInterop": true /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */,
-    "experimentalDecorators": true /* Enables experimental support for ES7 decorators. */,
-    "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
+    },
+    "types": ["@types/node", "@nuxt/types"]
   },
-  "include": [
-    "components/**/*",
-    "layouts/**/*",
-    "middleware/**/*",
-    "pages/**/*",
-    "plugins/**/*",
-    "store/**/*"
-  ]
+  "exclude": ["node_modules"]
 }
 ```
