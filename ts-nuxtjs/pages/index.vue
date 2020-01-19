@@ -3,7 +3,7 @@
     <div>
       <logo />
       <h1 class="title">
-        ts-nuxtjs
+        {{ title }}
       </h1>
       <h2 class="subtitle">
         My unreal Nuxt.js project
@@ -24,14 +24,24 @@
   </div>
 </template>
 
-<script>
-import Logo from '~/components/Logo.vue'
+<script lang="ts">
+import Vue from 'vue'
+import Logo from '@/components/Logo.vue'
 
-export default {
+interface Data {
+  title: string
+}
+
+export default Vue.extend({
   components: {
     Logo
+  },
+  data(): Data {
+    return {
+      title: 'ts-nuxtjs'
+    }
   }
-}
+})
 </script>
 
 <style>
