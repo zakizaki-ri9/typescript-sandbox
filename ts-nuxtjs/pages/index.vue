@@ -25,23 +25,16 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Logo from '@/components/Logo.vue'
+import { Vue, Component } from 'nuxt-property-decorator'
 
-interface Data {
-  title: string
-}
-
-export default Vue.extend({
+@Component({
   components: {
-    Logo
-  },
-  data(): Data {
-    return {
-      title: 'ts-nuxtjs'
-    }
+    Logo: () => import('~/components/Logo.vue')
   }
 })
+export default class extends Vue {
+  title: string = 'ts-nuxt'
+}
 </script>
 
 <style>
