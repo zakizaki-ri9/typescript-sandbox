@@ -23,16 +23,28 @@ export default function App(): JSX.Element {
   };
 
   const completeTodo = (index: number) => {
-    let newTodos = [...todos];
-    newTodos[index].complete = !newTodos[index].complete;
-    setTodos(newTodos);
+    setTodos(
+      todos.map((todo, i) => {
+        if (index === i) todo.complete = !todo.complete;
+        return todo;
+      })
+    );
+  };
+
+  const removeTodo = (index: number) => {
+    setTodos(
+      todos.filter((_, i) => {
+        return index !== i;
+      })
+    );
   };
 
   const todoElems = todos.map((todo, index) => {
     return (
       <li key={index.toString()}>
-        {todo.complete ? "completed" : ""}
         <button onClick={() => completeTodo(index)}>{todo.text}</button>
+        <button onClick={() => removeTodo(index)}>remove</button>
+        {todo.complete ? "completed" : ""}
       </li>
     );
   });
