@@ -2,7 +2,7 @@
 
 - 0からwebpackとreactの導入
 
-# 手順
+# 導入手順
 
 ## npm install
 
@@ -45,3 +45,49 @@ module.exports = {
   }
 }
 ```
+
+# React系のメモ
+
+## [フラグメント](https://ja.reactjs.org/docs/fragments.html)
+
+- DOMに余分なノードを追加することないように子要素をまとめることができる
+
+```js
+class Columns extends React.Component {
+  render() {
+    return (
+      <React.Fragment>
+        <td>Hello</td>
+        <td>World</td>
+      </React.Fragment>
+    );
+  }
+}
+
+class Table extends React.Component {
+  render() {
+    return (
+      <table>
+        <tr>
+          <Columns />
+        </tr>
+      </table>
+    );
+  }
+```
+
+と記述した場合、
+
+```html
+<table>
+  <tr>
+    <div>
+      <td>Hello</td>
+      <td>World</td>
+    </div>
+  </tr>
+</table>
+```
+
+と、Fragment内の要素がそのまま出力される。
+
