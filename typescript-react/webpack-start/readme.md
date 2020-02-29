@@ -37,6 +37,8 @@ module.exports = {
   },
   module: { rules },
   resolve: {extensions: ['.ts', '.tsx', '.js']},
+
+  // webpack-dev-serverの設定
   devServer: {
     contentBase: './',
     port: 5000
