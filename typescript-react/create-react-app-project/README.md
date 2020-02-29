@@ -1,6 +1,6 @@
 create-react-app x typescriptを用いたお試し
 
-# メモ
+# 導入手順
 
 ## typescript系の導入
 
@@ -14,7 +14,7 @@ npm i --save-dev typescript @types/node @types/react @types/react-dom
 npm i --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser prettier eslint-config-prettier eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-app
 ```
 
-### package.json**
+### package.json
 
 eslintの設定内容によるチェック＆整形コマンドを追加
 
@@ -26,3 +26,8 @@ eslintの設定内容によるチェック＆整形コマンドを追加
 }
 ```
 
+# Redux
+
+## 咀嚼内容
+
+- 
