@@ -60,3 +60,15 @@ export default function App(): JSX.Element {
 - 注意点
   - 複数コンテクストを使用する場合は、複数コンテクストを扱うコンポーネントを作った方がよさそう
     - [複数のコンテクストを使用する](https://ja.reactjs.org/docs/context.html#consuming-multiple-contexts)
+
+# [Reach Router](https://github.com/reach/router)
+
+- React製のサードパーティRouter
+- GatsbyJSでも使われている - [GatsbyJS - Routing](https://www.gatsbyjs.org/docs/routing/)
+
+## 導入
+
+```bash
+npm i @reach/router
+npm i -D @types/reach__router
+```

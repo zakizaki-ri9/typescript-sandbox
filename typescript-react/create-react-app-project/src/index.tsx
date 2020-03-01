@@ -3,10 +3,22 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import { StoreProvider } from './Store'
+import { Router, RouteComponentProps } from '@reach/router'
+import HomePage from './HomePage'
+import FavPage from './FavPage'
+
+const RouterPage = (
+  props: { pageComponent: JSX.Element } & RouteComponentProps
+): JSX.Element => props.pageComponent
 
 ReactDOM.render(
   <StoreProvider>
-    <App />
+    <Router>
+      <App path="/">
+        <RouterPage pageComponent={<HomePage />} path="/"></RouterPage>
+        <RouterPage pageComponent={<FavPage />} path="/faves"></RouterPage>
+      </App>
+    </Router>
   </StoreProvider>,
   document.getElementById('root')
 )
