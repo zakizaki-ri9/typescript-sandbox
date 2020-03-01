@@ -1,19 +1,6 @@
 import React from 'react'
 import { Store } from './Store'
-
-interface IEpisode {
-  airdate: string
-  id: number
-  image: {
-    medium: string
-    original: string
-  }
-  name: string
-  number: number
-  season: number
-  summary: string
-  url: string
-}
+import { IEpisode, IAction } from './interfaces'
 
 export default function App(): JSX.Element {
   const { state, dispatch } = React.useContext(Store)
@@ -23,7 +10,7 @@ export default function App(): JSX.Element {
     state.episodes.length === 0 && fetchDataAction()
   })
 
-  const fetchDataAction = async () => {
+  const fetchDataAction = async (): Promise<IAction> => {
     const data = await fetch(
       'https://api.tvmaze.com/singlesearch/shows?q=rick-&-morty&embed=episodes'
     )
@@ -36,6 +23,25 @@ export default function App(): JSX.Element {
     })
   }
 
+  const toggleFavAction = (episode: IEpisode): IAction => {
+    const episodeInFav = state.favorites.includes(episode)
+    let dispatchObj = {
+      type: 'ADD_FAV',
+      payload: episode
+    }
+    if (episodeInFav) {
+      dispatchObj = {
+        type: 'REMOVE_FAV',
+        payload: state.favorites.filter(
+          (fav: IEpisode) => fav.id !== episode.id
+        )
+      }
+    }
+    return dispatch(dispatchObj)
+  }
+
+  console.log(state)
+
   return (
     <React.Fragment>
       <h1>TVMaze</h1>
@@ -47,6 +53,13 @@ export default function App(): JSX.Element {
               <div>{episode.name}</div>
               <section>
                 Season: {episode.season}, Number: {episode.number}
+                <button onClick={(): IAction => toggleFavAction(episode)}>
+                  {state.favorites.find(
+                    (fav: IEpisode) => fav.id === episode.id
+                  )
+                    ? 'UnFav'
+                    : 'Fav'}
+                </button>
               </section>
             </section>
           )
