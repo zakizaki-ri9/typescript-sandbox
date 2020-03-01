@@ -44,7 +44,10 @@ export default function App(): JSX.Element {
 
   return (
     <React.Fragment>
-      <h1>TVMaze</h1>
+      <header>
+        <h1>TVMaze</h1>
+        <h2>Favorite episodes: {state.favorites.length}</h2>
+      </header>
       <section>
         {state.episodes.map((episode: IEpisode) => {
           return (
