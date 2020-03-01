@@ -26,8 +26,37 @@ eslintの設定内容によるチェック＆整形コマンドを追加
 }
 ```
 
-# Redux
+# React系機能の咀嚼
 
-## 咀嚼内容
+## [React.lazy](https://ja.reactjs.org/docs/code-splitting.html#reactlazy)
 
-- 
+- 遅延読み込みのための機能
+
+```js
+// コンポーネントの遅延読み込み
+const EpisodeList = React.lazy<any>(() => import('./EpisodesList'))
+
+export default function App(): JSX.Element {
+  return (
+  <React.Fragment>
+    { /* EpisodeListが表示されるまでは、fallbackに指定した要素が表示される */ }
+    <React.Suspense fallback={<div>Loading...</div>}>
+      <section>
+        <EpisodeList {...props}></EpisodeList>
+      </section>
+    </React.Suspense>
+  </React.Fragment>
+  )
+}
+```
+
+## [コンテクスト - Context](https://ja.reactjs.org/docs/context.html#when-to-use-context)
+
+- Redux / Vuexと比べて、スコープを絞った状態管理が行える
+  - `React.createContext`で初期化
+  - `Context.Provider`時に渡す`value`が子要素で使用できる
+    - 使用するには`Context.Consumer`を使う
+  - `React.createContext`したものをコード内で使用するには`React.useContext`を使う
+- 注意点
+  - 複数コンテクストを使用する場合は、複数コンテクストを扱うコンポーネントを作った方がよさそう
+    - [複数のコンテクストを使用する](https://ja.reactjs.org/docs/context.html#consuming-multiple-contexts)
