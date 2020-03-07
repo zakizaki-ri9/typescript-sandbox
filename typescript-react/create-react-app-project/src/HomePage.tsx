@@ -1,6 +1,7 @@
 import React from 'react'
-import { IAction, IEpisode, IEpisodeProps } from './interfaces'
+import { IEpisodeProps } from './interfaces'
 import { Store } from './Store'
+import { fetchDataAction, toggleFavAction } from './Actions'
 
 const EpisodesList = React.lazy<any>(() => import('./EpisodesList'))
 
@@ -9,42 +10,13 @@ export default function HomePage(): JSX.Element {
 
   // Reactにおけるいろんな描画処理タイミングがまとまったもの
   React.useEffect(() => {
-    state.episodes.length === 0 && fetchDataAction()
+    state.episodes.length === 0 && fetchDataAction(dispatch)
   })
-
-  const fetchDataAction = async (): Promise<IAction> => {
-    const data = await fetch(
-      'https://api.tvmaze.com/singlesearch/shows?q=rick-&-morty&embed=episodes'
-    )
-    const json = await data.json()
-
-    // Actionsの実行
-    return dispatch({
-      type: 'FETCH_DATA',
-      payload: json._embedded.episodes
-    })
-  }
-
-  const toggleFavAction = (episode: IEpisode): IAction => {
-    const episodeInFav = state.favorites.includes(episode)
-    let dispatchObj = {
-      type: 'ADD_FAV',
-      payload: episode
-    }
-    if (episodeInFav) {
-      dispatchObj = {
-        type: 'REMOVE_FAV',
-        payload: state.favorites.filter(
-          (fav: IEpisode) => fav.id !== episode.id
-        )
-      }
-    }
-    return dispatch(dispatchObj)
-  }
 
   const props: IEpisodeProps = {
     episodes: state.episodes,
-    toggleFavAction: toggleFavAction,
+    store: { state, dispatch },
+    toggleFavAction,
     favorites: state.favorites
   }
 

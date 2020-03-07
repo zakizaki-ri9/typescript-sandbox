@@ -1,8 +1,8 @@
 import React from 'react'
-import { IEpisode, IAction } from './interfaces'
+import { IEpisode, IAction, IEpisodeProps } from './interfaces'
 
-export default function EpisodesList(props: any): Array<JSX.Element> {
-  const { episodes, toggleFavAction, favorites } = props
+export default function EpisodesList(props: IEpisodeProps): Array<JSX.Element> {
+  const { episodes, toggleFavAction, favorites, store } = props
   return episodes.map((episode: IEpisode) => {
     return (
       <section key={episode.id}>
@@ -10,7 +10,11 @@ export default function EpisodesList(props: any): Array<JSX.Element> {
         <div>{episode.name}</div>
         <section>
           Season: {episode.season}, Number: {episode.number}
-          <button onClick={(): IAction => toggleFavAction(episode)}>
+          <button
+            onClick={(): IAction =>
+              toggleFavAction(episode, store.state, store.dispatch)
+            }
+          >
             {favorites.find((fav: IEpisode) => fav.id === episode.id)
               ? 'UnFav'
               : 'Fav'}
