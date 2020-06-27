@@ -1,14 +1,18 @@
 <template>
   <div id="app">
-    Hello
+    <omikuji />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import Omikuji from '@/components/pages/Omikuji.vue'
 
 export default Vue.extend({
-  name: 'App'
+  name: 'App',
+  components: {
+    Omikuji
+  }
 })
 </script>
 
