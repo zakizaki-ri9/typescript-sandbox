@@ -1,10 +1,5 @@
 <template functional>
-  <button
-    :class="[
-      'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded',
-      data.staticClass
-    ]"
-  >
+  <button :class="[$style.btn, $style.btn_blue, data.staticClass]">
     <slot />
   </button>
 </template>
@@ -15,3 +10,7 @@ export default Vue.extend({
   name: 'ApplyButton'
 })
 </script>
+
+<style lang="scss" module>
+@import 'Button.scss';
+</style>
