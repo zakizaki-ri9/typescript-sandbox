@@ -1,21 +1,21 @@
 <template>
   <div id="app">
-    <!-- <ex-select :options="options" /> -->
+    <ex-select :options="options" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from '@vue/composition-api'
+import Vue from 'vue'
 import { routes } from '@/router'
 import ExSelect from '@/components/atoms/ExSelect.vue'
 
-export default defineComponent({
+export default Vue.extend({
   name: 'App',
   components: {
     ExSelect
   },
-  setup() {
-    const state = reactive({
+  data() {
+    return {
       options: routes.map(route => {
         return {
           disabled: false,
@@ -24,10 +24,6 @@ export default defineComponent({
           selected: false
         }
       })
-    })
-
-    return {
-      ...toRefs(state)
     }
   }
 })

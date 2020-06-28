@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, SetupContext } from '@vue/composition-api'
+import Vue, { PropType } from 'vue'
 
 export type Option = {
   disabled: boolean
@@ -22,21 +22,16 @@ export type Option = {
   selected: boolean
 }
 
-export default defineComponent({
+export default Vue.extend({
   props: {
     options: {
       type: Array as PropType<Option[]>,
       default: []
     }
   },
-
-  setup(c: SetupContext) {
-    const onChange = (value: string) => {
-      c.emit('change', value)
-    }
-
-    return {
-      onChange
+  methods: {
+    onChange(value: string) {
+      this.$emit('change', value)
     }
   }
 })
