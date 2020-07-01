@@ -5,17 +5,17 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent, toRefs, reactive } from '@vue/composition-api'
 import { routes } from '@/router'
 import ExSelect from '@/components/atoms/ExSelect.vue'
 
-export default Vue.extend({
+export default defineComponent({
   name: 'App',
   components: {
     ExSelect
   },
-  data() {
-    return {
+  setup() {
+    const state = reactive({
       options: routes.map(route => {
         return {
           disabled: false,
@@ -24,6 +24,10 @@ export default Vue.extend({
           selected: false
         }
       })
+    })
+
+    return {
+      ...toRefs(state)
     }
   }
 })

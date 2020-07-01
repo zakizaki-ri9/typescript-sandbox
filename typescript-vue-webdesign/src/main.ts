@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
 
+// CompositionAPIの有効化
+import CompositionAPI from '@vue/composition-api'
+Vue.use(CompositionAPI)
+
 // ルーティング
 import { router } from '@/router'
 

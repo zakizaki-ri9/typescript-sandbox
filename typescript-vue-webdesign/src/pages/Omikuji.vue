@@ -6,10 +6,10 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from '@vue/composition-api'
 import ApplyButton from '@/components/atoms/button/ApplyButton.vue'
 import ExH1 from '@/components/atoms/heading/ExH1.vue'
-export default Vue.extend({
+export default defineComponent({
   name: 'Omikuji',
   components: {
     ApplyButton,
