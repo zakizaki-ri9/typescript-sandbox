@@ -1,6 +1,5 @@
 <template>
   <div>
-    test
     <facebook-login-form></facebook-login-form>
   </div>
 </template>

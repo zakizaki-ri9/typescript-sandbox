@@ -1,7 +1,13 @@
 <template>
-  test
-  <input type="text" v-model="appId" />
-  <button @click="onLogin">Facebook Login</button>
+  <div>
+    appId: <input type="text" v-model="appId" />
+    <ul>
+      <li><button @click="onInit">Facebook App Init</button></li>
+      <li><button @click="onLogin">Login</button></li>
+      <li><button @click="onLogout">Logout</button></li>
+      <li><button @click="onGetLoginStatus">Get Login Status</button></li>
+    </ul>
+  </div>
 </template>
 
 <script lang="ts">
@@ -10,15 +16,37 @@ import { FacebookSdk } from "@/components/facebookSdk";
 
 export default defineComponent({
   name: "FacebookLoginForm",
-  async setup() {
+  setup() {
     const facebookSdk = new FacebookSdk();
     const appId = ref("");
+
+    const onInit = () => {
+      facebookSdk
+        .init(appId.value)
+        .then((fb: any) => {
+          console.log(fb);
+        })
+        .catch((error: any) => {
+          console.error(error);
+        });
+    };
     const onLogin = () => {
-      facebookSdk.init(appId.value);
+      facebookSdk.login();
+    };
+    const onLogout = () => {
+      facebookSdk.logout();
+    };
+    const onGetLoginStatus = () => {
+      console.log({
+        loginStatus: facebookSdk.getLoginStatus()
+      });
     };
     return {
       appId,
-      onLogin
+      onInit,
+      onLogin,
+      onLogout,
+      onGetLoginStatus
     };
   }
 });
