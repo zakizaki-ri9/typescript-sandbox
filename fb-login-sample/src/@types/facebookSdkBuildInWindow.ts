@@ -29,10 +29,10 @@ interface Facebook {
   getLoginStatus(callback: (response: FacebookCallbackResponse) => void): void;
 
   // https://developers.facebook.com/docs/reference/javascript/FB.login/v8.0
-  login(callback: any): void;
+  login(callback: (response: FacebookCallbackResponse) => void): void;
 
   // https://developers.facebook.com/docs/reference/javascript/FB.logout/v8.0
-  logout(callback: any): void;
+  logout(callback: (response: FacebookCallbackResponse) => void): void;
 }
 
 interface Window {
