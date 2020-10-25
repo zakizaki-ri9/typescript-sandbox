@@ -31,9 +31,8 @@ export class FacebookSdk {
       new Error(error.toString());
     };
 
-    // headに仕込む
-    const head = document.querySelector("head");
-    head?.appendChild(scriptElement);
+    // headに仕込む＆読み込みさせる
+    document.querySelector("head")?.appendChild(scriptElement);
   }
 
   init(
@@ -53,6 +52,7 @@ export class FacebookSdk {
           xfbml,
           version
         });
+
         resolve(window.FB);
         this.sdkInitialized = true;
       } catch (error) {
@@ -62,31 +62,30 @@ export class FacebookSdk {
     });
   }
 
-  // https://developers.facebook.com/docs/reference/javascript/FB.login/v8.0
-  getLoginStatus(): LoginStatusResponse | null {
+  getLoginStatus(): void {
     this.validSdkInitialized();
 
-    let returnResponse: LoginStatusResponse | null = null;
-    window.FB.getLoginStatus((response: LoginStatusResponse) => {
-      returnResponse = response;
-    });
-    return returnResponse;
-  }
-
-  login(): any {
-    this.validSdkInitialized();
-
-    window.FB.login((response: any) => {
+    window.FB.getLoginStatus((response: FacebookCallbackResponse) => {
       console.log({
         response
       });
     });
   }
 
-  logout(): any {
+  login(): void {
     this.validSdkInitialized();
 
-    window.FB.logout((response: any) => {
+    window.FB.login((response: FacebookCallbackResponse) => {
+      console.log({
+        response
+      });
+    });
+  }
+
+  logout(): void {
+    this.validSdkInitialized();
+
+    window.FB.logout((response: FacebookCallbackResponse) => {
       console.log({
         response
       });

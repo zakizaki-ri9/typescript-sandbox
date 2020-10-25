@@ -23,7 +23,7 @@ export default defineComponent({
     const onInit = () => {
       facebookSdk
         .init(appId.value)
-        .then((fb: any) => {
+        .then((fb: Facebook) => {
           console.log(fb);
         })
         .catch((error: any) => {
@@ -37,9 +37,7 @@ export default defineComponent({
       facebookSdk.logout();
     };
     const onGetLoginStatus = () => {
-      console.log({
-        loginStatus: facebookSdk.getLoginStatus()
-      });
+      facebookSdk.getLoginStatus();
     };
     return {
       appId,

@@ -1,24 +1,18 @@
-# fb-login-sample
+# Facebookログインの検証
 
-## Project setup
-```
+## 動作確認
+
+```bash
+# インストール
 yarn install
-```
 
-### Compiles and hot-reloads for development
-```
+# 起動
 yarn serve
 ```
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## 参考リソース
 
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Facebook系
+  - Facebook JavaScript SDK - https://developers.facebook.com/docs/javascript/quickstart
+- ライブラリ
+  - [vue-facebook-login-component](https://github.com/adi518/vue-facebook-login-component)
