@@ -72,14 +72,12 @@ export class FacebookSdk {
     });
   }
 
-  login(): void {
+  login(
+    callback: (response: FacebookCallbackResponse) => void,
+    option?: Record<symbol, any>
+  ): void {
     this.validSdkInitialized();
-
-    window.FB.login((response: FacebookCallbackResponse) => {
-      console.log({
-        response
-      });
-    });
+    window.FB.login(callback, option);
   }
 
   logout(): void {
@@ -90,5 +88,15 @@ export class FacebookSdk {
         response
       });
     });
+  }
+
+  api(
+    path: string,
+    callback: (response: Record<symbol, any>) => void,
+    method: "get" | "post" | "delete" = "get",
+    params?: Record<symbol, any>
+  ): void {
+    this.validSdkInitialized();
+    window.FB.api(path, method, params, callback);
   }
 }

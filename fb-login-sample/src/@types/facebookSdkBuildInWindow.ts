@@ -5,8 +5,8 @@ interface FacebookInitParameter {
   version: string; // https://developers.facebook.com/docs/graph-api/changelog
 }
 
-// https://developers.facebook.com/docs/reference/javascript/FB.getAuthReponse
-interface AuthReponse {
+// https://developers.facebook.com/docs/reference/javascript/FB.getAuthResponse
+interface AuthResponse {
   accessToken: string;
   data_access_expiration_time: number;
   expiresIn: number;
@@ -18,7 +18,7 @@ interface AuthReponse {
 
 interface FacebookCallbackResponse {
   status: "connected" | "not_authorized" | "unknown";
-  authReponse: AuthReponse;
+  authResponse: AuthResponse;
 }
 
 interface Facebook {
@@ -29,10 +29,33 @@ interface Facebook {
   getLoginStatus(callback: (response: FacebookCallbackResponse) => void): void;
 
   // https://developers.facebook.com/docs/reference/javascript/FB.login/v8.0
-  login(callback: (response: FacebookCallbackResponse) => void): void;
+  login(
+    callback: (response: FacebookCallbackResponse) => void,
+    option?: Record<symbol, any>
+  ): void;
 
   // https://developers.facebook.com/docs/reference/javascript/FB.logout/v8.0
   logout(callback: (response: FacebookCallbackResponse) => void): void;
+
+  // https://developers.facebook.com/docs/javascript/reference/FB.api/
+  // FIXME: このへん冗長だからなんとかしたいなぁ...
+  api(path: string, callback: (response: Record<symbol, any>) => void): void;
+  api(
+    path: string,
+    method: "get" | "post" | "delete",
+    callback: (response: Record<symbol, any>) => void
+  ): void;
+  api(
+    path: string,
+    params: Record<symbol, any> | undefined,
+    callback: (response: Record<symbol, any>) => void
+  ): void;
+  api(
+    path: string,
+    method: "get" | "post" | "delete",
+    params: Record<symbol, any> | undefined,
+    callback: (response: Record<symbol, any>) => void
+  ): void;
 }
 
 interface Window {
