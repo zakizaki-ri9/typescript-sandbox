@@ -1,38 +1,37 @@
 <template>
   <div>
-    appId: <input type="text" v-model="appId" />
-    <br />
-    appSecrets: <input type="text" v-model="appSecrets" />
-    <br />
-    accessToken: {{ accessToken }}
-    <br />
-    long accessToken: {{ longAccessToken }}
-    <br />
-    Facebook Page ID: <input type="text" v-model="facebookPageId" />
-    <br />
-    Instagram Business ID: <input type="text" v-model="instagramBusinessId" />
-    <ul>
-      <li><button @click="onInit">Facebook App Init</button></li>
-      <li><button @click="onLogin">Login</button></li>
-      <li><button @click="onLogout">Logout</button></li>
-      <li><button @click="onGetLoginStatus">Get Login Status</button></li>
-      <li>
-        <button @click="onGetLongAccessToken">Get Long Access Token</button>
-      </li>
-      <li>
-        <button @click="onGetMeAccount">Get Me Account</button>
-      </li>
-      <li>
-        <button @click="onGetInstagramBisinessAccount">
-          Get Instagram Bisiness Account
-        </button>
-      </li>
-      <li>
-        <button @click="onGetMedia">
-          Get Media
-        </button>
-      </li>
-    </ul>
+    <div>
+      <p>appId: <input type="text" v-model="appId" /></p>
+      <p>appSecrets: <input type="text" v-model="appSecrets" /></p>
+      <button @click="onInit">Facebook App Init</button>
+    </div>
+    <div>
+      <button @click="onLogin">Login</button>
+      <p>accessToken: {{ accessToken }}</p>
+    </div>
+    <div>
+      <button @click="onGetLongAccessToken">Get Long Access Token</button>
+      <p>long accessToken: {{ longAccessToken }}</p>
+    </div>
+    <div>
+      <button @click="onGetMeAccount">Get Me Account</button>
+      <p>Facebook Page ID: <input type="text" v-model="facebookPageId" /></p>
+    </div>
+    <div>
+      <button @click="onGetInstagramBisinessAccount">
+        Get Instagram Bisiness Account
+      </button>
+      <p>
+        Instagram Business ID:
+        <input type="text" v-model="instagramBusinessId" />
+      </p>
+    </div>
+    <div>
+      <button @click="onGetMedia">
+        Get Media</button
+      ><br />
+      <img :src="instagramMediaSrc" width="400" />
+    </div>
   </div>
 </template>
 
@@ -51,6 +50,7 @@ export default defineComponent({
     const longAccessToken = ref("");
     const facebookPageId = ref("");
     const instagramBusinessId = ref("");
+    const instagramMediaSrc = ref("");
 
     const onInit = () => {
       facebookSdk
@@ -153,6 +153,13 @@ export default defineComponent({
         `https://graph.facebook.com/v9.0/${instagramBusinessId.value}?` + params
       );
       const json = await response.json();
+      if (json.media.data && json.media.data.length > 0) {
+        instagramMediaSrc.value = json.media.data[0].media_url;
+        console.log({
+          instagramMediaSrc,
+          data: json.media.data
+        });
+      }
       console.log({
         json
       });
@@ -164,6 +171,7 @@ export default defineComponent({
       longAccessToken,
       facebookPageId,
       instagramBusinessId,
+      instagramMediaSrc,
       onInit,
       onLogin,
       onLogout,
@@ -176,3 +184,12 @@ export default defineComponent({
   }
 });
 </script>
+
+<style scoped>
+div {
+  margin-bottom: 16px;
+}
+p {
+  margin: 0;
+}
+</style>
