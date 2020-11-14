@@ -1,25 +1,31 @@
 <template>
   <div>
     <div>
+      <h2>Step1 Facebook JavaScript SDKの初期化</h2>
       <p>appId: <input type="text" v-model="appId" /></p>
       <p>appSecrets: <input type="text" v-model="appSecrets" /></p>
       <button @click="onInit">Facebook App Init</button>
+      <p style="color: red;">{{ facebookSdkInitStatus }}</p>
     </div>
     <div>
+      <h2>Step2 Facebookログイン</h2>
       <button @click="onLogin">Login</button>
       <p>accessToken: {{ accessToken }}</p>
     </div>
     <div>
+      <h2>Step3 長期トークンの取得</h2>
       <button @click="onGetLongAccessToken">Get Long Access Token</button>
       <p>long accessToken: {{ longAccessToken }}</p>
     </div>
     <div>
+      <h2>Step4 Facebook Page IDの取得</h2>
       <button @click="onGetMeAccount">Get Me Account</button>
       <p>Facebook Page ID: <input type="text" v-model="facebookPageId" /></p>
     </div>
     <div>
-      <button @click="onGetInstagramBisinessAccount">
-        Get Instagram Bisiness Account
+      <h2>Step5 Instagram Business Account IDの取得</h2>
+      <button @click="onGetInstagramBusinessAccount">
+        Get Instagram Business Account
       </button>
       <p>
         Instagram Business ID:
@@ -27,6 +33,7 @@
       </p>
     </div>
     <div>
+      <h2>Step6 Instagram Mediaの取得</h2>
       <button @click="onGetMedia">
         Get Media</button
       ><br />
@@ -37,13 +44,14 @@
 
 <script lang="ts">
 /* eslint-disable @typescript-eslint/camelcase */
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, computed } from "vue";
 import { FacebookSdk } from "@/components/facebookSdk";
 
 export default defineComponent({
   name: "FacebookLoginForm",
   setup() {
     const facebookSdk = new FacebookSdk();
+    const isFacebookSdkInitialized = ref(false);
     const appId = ref(process.env.VUE_APP_FACEBOOK_APP_ID || "");
     const appSecrets = ref(process.env.VUE_APP_FACEBOOK_APP_SECRETS || "");
     const accessToken = ref("");
@@ -52,13 +60,19 @@ export default defineComponent({
     const instagramBusinessId = ref("");
     const instagramMediaSrc = ref("");
 
+    const facebookSdkInitStatus = computed(() =>
+      isFacebookSdkInitialized.value ? "成功!!" : "まだ..."
+    );
+
     const onInit = () => {
       facebookSdk
         .init(appId.value)
         .then((fb: Facebook) => {
+          isFacebookSdkInitialized.value = true;
           console.log(fb);
         })
         .catch((error: any) => {
+          isFacebookSdkInitialized.value = false;
           console.error(error);
         });
     };
@@ -125,7 +139,7 @@ export default defineComponent({
     };
 
     // GET /{page-id}?fields=instagram_business_account Step5
-    const onGetInstagramBisinessAccount = async () => {
+    const onGetInstagramBusinessAccount = async () => {
       const params = new URLSearchParams({
         fields: "instagram_business_account",
         access_token: getAccessToken()
@@ -172,13 +186,14 @@ export default defineComponent({
       facebookPageId,
       instagramBusinessId,
       instagramMediaSrc,
+      facebookSdkInitStatus,
       onInit,
       onLogin,
       onLogout,
       onGetLoginStatus,
       onGetLongAccessToken,
       onGetMeAccount,
-      onGetInstagramBisinessAccount,
+      onGetInstagramBusinessAccount,
       onGetMedia
     };
   }
@@ -186,7 +201,12 @@ export default defineComponent({
 </script>
 
 <style scoped>
+h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
 div {
+  margin-top: 0;
   margin-bottom: 16px;
 }
 p {
