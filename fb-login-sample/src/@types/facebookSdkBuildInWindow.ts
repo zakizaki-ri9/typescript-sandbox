@@ -21,6 +21,22 @@ interface FacebookCallbackResponse {
   authResponse: AuthResponse;
 }
 
+interface FacebookMeResponse {
+  data?: {
+    access_token: string;
+    category: string;
+    category_list: { id: string; name: string }[];
+    id: string;
+    name: string;
+  }[];
+  paging?: {
+    cursors: {
+      after: string;
+      before: string;
+    };
+  };
+}
+
 interface Facebook {
   // https://developers.facebook.com/docs/javascript/reference/FB.init/v8.0
   init(param: FacebookInitParameter): void;
