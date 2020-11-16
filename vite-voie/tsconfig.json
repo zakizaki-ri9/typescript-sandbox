@@ -12,7 +12,7 @@
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "/@/*": [ // /から始まるようにします
+      "/~/*": [ // vite.config.tsのaliasと合わせている
         "src/*"
       ]
     },
