@@ -10,7 +10,7 @@ function invalidNumber(x: number): boolean {
 }
 
 // main
-function reverse(x: number): number {
+export function reverse(x: number): number {
   if (invalidNumber(x)) {
     return 0;
   }
