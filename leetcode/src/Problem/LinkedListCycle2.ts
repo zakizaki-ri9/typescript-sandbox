@@ -1,5 +1,5 @@
 /**
- * https://leetcode.com/problems/linked-list-cycle/description/
+ * https://leetcode.com/problems/linked-list-cycle-ii/
  */
 
 export class ListNode {
