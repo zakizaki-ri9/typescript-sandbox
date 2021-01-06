@@ -1,12 +1,8 @@
 <script lang="ts">
+  import { createLifeGame } from "./lifegame";
   const ROW_SIZE = 20;
   const COLUMN_SIZE = 20;
-
-  const grid = [...Array(ROW_SIZE)].map((_) => {
-    return [...Array(COLUMN_SIZE)].map((_) => {
-      isAlive: false;
-    });
-  });
+  const lifegame = createLifeGame(ROW_SIZE, COLUMN_SIZE);
 </script>
 
 <style>
@@ -31,14 +27,21 @@
     height: 20px;
     background-color: #eee;
   }
+  .cell.alive {
+    background-color: red;
+  }
 </style>
 
 <div class="lifegame-container">
   <div class="lifegame-cells-container">
     <div class="lifegame-cells">
-      {#each grid as row, i}
-        {#each row as col, j}
-          <div class="cell" style="grid-row: {i + 1}" />
+      {#each $lifegame.grid as row, rowIndex}
+        {#each row as col, colIndex}
+          <div
+            class="cell"
+            class:alive={col.isAlive}
+            style="grid-row: {rowIndex + 1}"
+            on:click={(_) => lifegame.toggle(rowIndex, colIndex)} />
         {/each}
       {/each}
     </div>
