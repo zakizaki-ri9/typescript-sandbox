@@ -34,6 +34,7 @@
 
 <div class="lifegame-container">
   <div class="lifegame-cells-container">
+    <button on:click={() => lifegame.moveNextTick()}>1ターン進める</button>
     <div class="lifegame-cells">
       {#each $lifegame.grid as row, rowIndex}
         {#each row as col, colIndex}
