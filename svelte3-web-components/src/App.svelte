@@ -1,11 +1,23 @@
 <script lang="ts">
   import { createLifeGame } from "./lifegame";
+  import { onDestroy } from "svelte";
   const ROW_SIZE = 20;
   const COLUMN_SIZE = 20;
   const lifegame = createLifeGame(ROW_SIZE, COLUMN_SIZE);
 
   let isRunning = false;
   let tickInterval: number | undefined = undefined;
+
+  const stopTimer = () => {
+    clearInterval(tickInterval);
+    tickInterval = undefined;
+  };
+
+  onDestroy(() => {
+    if (tickInterval) {
+      stopTimer();
+    }
+  });
 
   // リアクティブに動作する、Vueでいうcomputedあたりの動作
   $: if (isRunning && !tickInterval) {
@@ -14,8 +26,7 @@
     }, 300);
   }
   $: if (!isRunning && tickInterval) {
-    clearInterval(tickInterval);
-    tickInterval = undefined;
+    stopTimer();
   }
 </script>
 
