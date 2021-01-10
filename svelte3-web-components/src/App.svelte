@@ -3,6 +3,20 @@
   const ROW_SIZE = 20;
   const COLUMN_SIZE = 20;
   const lifegame = createLifeGame(ROW_SIZE, COLUMN_SIZE);
+
+  let isRunning = false;
+  let tickInterval: number | undefined = undefined;
+
+  // リアクティブに動作する、Vueでいうcomputedあたりの動作
+  $: if (isRunning && !tickInterval) {
+    tickInterval = setInterval(() => {
+      lifegame.moveNextTick();
+    }, 300);
+  }
+  $: if (!isRunning && tickInterval) {
+    clearInterval(tickInterval);
+    tickInterval = undefined;
+  }
 </script>
 
 <style>
@@ -34,7 +48,15 @@
 
 <div class="lifegame-container">
   <div class="lifegame-cells-container">
-    <button on:click={() => lifegame.moveNextTick()}>1ターン進める</button>
+    <div>
+      <button on:click={() => lifegame.moveNextTick()}>1ターン進める</button>
+      <br />
+      {#if !isRunning}
+        <button on:click={() => (isRunning = true)}>Timer start</button>
+      {:else}
+        <button on:click={() => (isRunning = false)}>Timer stop</button>
+      {/if}
+    </div>
     <div class="lifegame-cells">
       {#each $lifegame.grid as row, rowIndex}
         {#each row as col, colIndex}
