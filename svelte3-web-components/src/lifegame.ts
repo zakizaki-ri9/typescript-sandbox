@@ -17,7 +17,7 @@ export function createLifeGame(rowSize: number, colSize: number)  {
     subscribe,
     toggle: (rowIndex: number, colIndex: number) => update((state) => toggle(state, rowIndex, colIndex)),
     moveNextTick: () => update(moveNextTick),
-  }
+  };
 }
 
 /**
@@ -34,7 +34,7 @@ function isCellAliveWhenNextTick(oldState: State, rowIndex: number, colIndex: nu
     [-1, -1], [-1, 0], [-1, 1],
     [0, -1], [0, 1],
     [1, -1], [1, 0], [1, 1]
-  ]
+  ];
 
   // 隣接するセルのいきたセルを数える
   let count = 0;
@@ -49,9 +49,9 @@ function isCellAliveWhenNextTick(oldState: State, rowIndex: number, colIndex: nu
   }
 
   if (oldState.grid[rowIndex][colIndex].isAlive) {
-    return count === 2 || count === 3
+    return count === 2 || count === 3;
   }
-  return count === 3
+  return count === 3;
 }
 
 function moveNextTick(oldState: State): State {
@@ -59,10 +59,10 @@ function moveNextTick(oldState: State): State {
     ...oldState,
     grid: oldState.grid.map((row, rowIndex) => {
       return row.map((col, colIndex) => {
-        return { isAlive: isCellAliveWhenNextTick(oldState, rowIndex, colIndex) }
-      })
+        return { isAlive: isCellAliveWhenNextTick(oldState, rowIndex, colIndex) };
+      });
     }),
-  }
+  };
 }
 
 // グリッドの初期値
@@ -70,22 +70,22 @@ function defaultGrid(rowSize: number, colSize: number): Cell[][] {
   return [...Array(rowSize)].map(_ => {
     return [...Array(colSize)].map(_ => {
       // isAliveがtrueのとき、セルは生きている
-      return { isAlive: false }
-    })
-  })
+      return { isAlive: false };
+    });
+  });
 }
 
 // グリッドのクリックされたセルの生死を反転する
 function toggle(oldState: State, rowIndex: number, colIndex: number): State {
   const newGrid = oldState.grid.map((currentRow, currentRowIndex) => {
     return currentRow.map((currentCol, currentColIndex) => {
-      return { isAlive: rowIndex === currentRowIndex && colIndex === currentColIndex ? !currentCol.isAlive : currentCol.isAlive }
-    })
-  })
+      return { isAlive: rowIndex === currentRowIndex && colIndex === currentColIndex ? !currentCol.isAlive : currentCol.isAlive };
+    });
+  });
   return {
     ...oldState,
     grid: newGrid
-  }
+  };
 }
 
 // ライフゲームの初期値
