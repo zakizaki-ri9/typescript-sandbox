@@ -1,6 +1,6 @@
 {
-  // TODO: svelte x typescript の lint が効くようになったら無効化
-  "[svelte]": {
-    "editor.defaultFormatter": "svelte.svelte-vscode"
-  }
+  // npm run format でフォーマットするため、無効化
+  // "[svelte]": {
+  //   "editor.defaultFormatter": "svelte.svelte-vscode"
+  // }
 }

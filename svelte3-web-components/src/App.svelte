@@ -1,3 +1,5 @@
+<svelte:options tag="svelte-lifegame" immutable={true} />
+
 <script lang="ts">
   import { createLifeGame } from "./lifegame";
   import { onDestroy } from "svelte";
@@ -30,6 +32,32 @@
   }
 </script>
 
+<div class="lifegame-container">
+  <div class="lifegame-cells-container">
+    <div>
+      <button on:click={() => lifegame.moveNextTick()}>1ターン進める</button>
+      <br />
+      {#if !isRunning}
+        <button on:click={() => (isRunning = true)}>Timer start</button>
+      {:else}
+        <button on:click={() => (isRunning = false)}>Timer stop</button>
+      {/if}
+    </div>
+    <div class="lifegame-cells">
+      {#each $lifegame.grid as row, rowIndex}
+        {#each row as col, colIndex}
+          <div
+            class="cell"
+            class:alive={col.isAlive}
+            style="grid-row: {rowIndex + 1}"
+            on:click={_ => lifegame.toggle(rowIndex, colIndex)}
+          />
+        {/each}
+      {/each}
+    </div>
+  </div>
+</div>
+
 <style>
   .lifegame-container {
     display: block;
@@ -56,28 +84,3 @@
     background-color: red;
   }
 </style>
-
-<div class="lifegame-container">
-  <div class="lifegame-cells-container">
-    <div>
-      <button on:click={() => lifegame.moveNextTick()}>1ターン進める</button>
-      <br />
-      {#if !isRunning}
-        <button on:click={() => (isRunning = true)}>Timer start</button>
-      {:else}
-        <button on:click={() => (isRunning = false)}>Timer stop</button>
-      {/if}
-    </div>
-    <div class="lifegame-cells">
-      {#each $lifegame.grid as row, rowIndex}
-        {#each row as col, colIndex}
-          <div
-            class="cell"
-            class:alive={col.isAlive}
-            style="grid-row: {rowIndex + 1}"
-            on:click={(_) => lifegame.toggle(rowIndex, colIndex)} />
-        {/each}
-      {/each}
-    </div>
-  </div>
-</div>

@@ -5,8 +5,10 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public",
-    "lint": "eslint --ext svelte,ts src/",
-    "lint:fix": "eslint --fix --ext svelte,ts src/"
+    "lint": "eslint --ext ts,svelte src/",
+    "lint:fix": "eslint --fix --ext ts,svelte src/",
+    "format": "prettier-eslint $PWD/'src/**/*.{ts,svelte}'",
+    "format:fix": "prettier-eslint --write $PWD/'src/**/*.{ts,svelte}'"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^16.0.0",
@@ -17,6 +19,8 @@
     "@typescript-eslint/parser": "^4.12.0",
     "eslint": "^7.17.0",
     "eslint-plugin-svelte3": "^3.0.0",
+    "prettier-eslint-cli": "^5.0.0",
+    "prettier-plugin-svelte": "^2.0.3",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.0",
