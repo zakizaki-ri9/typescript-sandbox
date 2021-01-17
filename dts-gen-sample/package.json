@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc index.ts",
+    "exec": "npm run build && npx node index.js"
   },
   "author": "zakizaki-ri9",
   "license": "ISC",
