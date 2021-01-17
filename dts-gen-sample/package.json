@@ -1,0 +1,16 @@
+{
+  "name": "dts-gen-sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zakizaki-ri9",
+  "license": "ISC",
+  "devDependencies": {
+    "dts-gen": "^0.6.0",
+    "jp-prefecture": "^0.2.1",
+    "typescript": "^4.1.3"
+  }
+}
