@@ -1,6 +1,10 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
-
   "include": ["src/**/*"],
-  "exclude": ["node_modules/*", "__sapper__/*", "public/*"]
+  "exclude": ["node_modules/*", "__sapper__/*", "public/*"],
+  "compilerOptions": {
+    // @tsconfig/svelte/tsconfig.json で types を定義しているため
+    // 追加した @types 系は追記する必要あり
+    "types": ["chrome"]
+  }
 }
