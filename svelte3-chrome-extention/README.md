@@ -29,3 +29,7 @@ npm i -D web-ext
 ```bash
 npx web-ext run --source-dir ./public/ --target=chromium --start-url github.com
 ```
+
+[コマンドリファレンス](https://extensionworkshop.com/documentation/develop/web-ext-command-reference/)の`--target`に`chromium`が記述されているのは驚き。
+
+`--chromium-binary`, `--chromium-profile`のオプションもあることから、Chrome拡張機能開発デフォの支援パッケージとして使っても良いかも。
