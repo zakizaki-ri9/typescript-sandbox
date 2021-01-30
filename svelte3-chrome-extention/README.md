@@ -23,3 +23,9 @@ npm i -D web-ext
 以下を元にChrome拡張機能の設定・権限情報を記述
 
 - https://developer.chrome.com/docs/extensions/mv2/manifest/
+
+## Chrome拡張機能のデバッグ
+
+```bash
+npx web-ext run --source-dir ./public/ --target=chromium --start-url github.com
+```
