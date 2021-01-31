@@ -1,30 +1,35 @@
 <script lang="ts">
-	export let name: string;
+  let show = false;
+  function copyWebPageInfo(myFormat: string) {
+    show = false;
+    const prepCode = {
+      code: `var formatFromPopup = "${myFormat}"`,
+    };
+    const mainCode = {
+      file: "content_script.js",
+    };
+    chrome.tabs.executeScript(null, prepCode, () => {
+      chrome.tabs.executeScript(null, mainCode);
+      show = true;
+      setTimeout(() => {
+        show = false;
+      }, 3000);
+    });
+  }
+
+  $: console.log(`show: ${show}`);
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+  <div><span>Webページの情報を読み取る</span></div>
+  <div class="tooltip">
+    <span class="tooltiptext" class:show>クリップボードにコピーしました</span>
+  </div>
+  <div class="button-container">
+    <button on:click={() => copyWebPageInfo("[$title]($url)$lf$selection")}
+      >Markdown記法</button
+    >
+  </div>
 </main>
 
-<style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
-</style>
+<style></style>
