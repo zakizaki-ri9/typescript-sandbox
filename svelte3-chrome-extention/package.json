@@ -9,6 +9,7 @@
     "chrome": "web-ext run --source-dir ./public/ --target=chromium --start-url github.com"
   },
   "devDependencies": {
+    "@rollup/plugin-alias": "^3.1.2",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-typescript": "^6.0.0",
