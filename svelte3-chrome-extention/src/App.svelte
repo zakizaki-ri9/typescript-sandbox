@@ -16,8 +16,6 @@
       }, 3000);
     });
   }
-
-  $: console.log(`show: ${show}`);
 </script>
 
 <main>

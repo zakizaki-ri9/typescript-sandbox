@@ -33,3 +33,22 @@ npx web-ext run --source-dir ./public/ --target=chromium --start-url github.com
 [コマンドリファレンス](https://extensionworkshop.com/documentation/develop/web-ext-command-reference/)の`--target`に`chromium`が記述されているのは驚き。
 
 `--chromium-binary`, `--chromium-profile`のオプションもあることから、Chrome拡張機能開発デフォの支援パッケージとして使っても良いかも。
+
+## ユニットテスト準備
+
+テストツール系をインストール
+
+```bash
+npm i -D @testing-library/svelte jest babel-jest @babel/preset-env svelte-jester @testing-library/jest-dom
+
+# TypeScriptで書くために追加インストール
+npm i -D ts-jest @types/jest
+```
+
+### ts-jest x svelte-jester
+
+https://github.com/mihar-22/svelte-jester#typescript をもとに設定追加
+
+```bash
+npm i -D svelte-preprocess
+```

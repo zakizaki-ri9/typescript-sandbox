@@ -7,7 +7,7 @@
     * @tsconfig/svelte/tsconfig.json で types を定義しているため
     * 追加した @types 系は追記する必要あり
     **/
-    "types": ["svelte", "chrome"],
+    "types": ["svelte", "chrome", "jest"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
