@@ -1,5 +1,5 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from "react";
+import { Link } from "gatsby";
 
 const NotFoundPage: React.FC = () => {
   return (
@@ -7,7 +7,7 @@ const NotFoundPage: React.FC = () => {
       <h1>404Page</h1>
       <Link to="/">Go home</Link>
     </main>
-  )
-}
+  );
+};
 
-export default NotFoundPage
+export default NotFoundPage;

@@ -1,7 +1,7 @@
-import React from "react"
+import React from "react";
 
 const IndexPage: React.FC = () => {
   return <p>Hello Gatsby</p>;
-}
+};
 
-export default IndexPage
+export default IndexPage;
