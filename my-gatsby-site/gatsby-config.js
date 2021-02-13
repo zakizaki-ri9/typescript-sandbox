@@ -22,5 +22,12 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: "gatsby-source-rss-feed",
+      options: {
+        url: "https://kic-yuuki.hatenablog.com/feed",
+        name: "Hatena",
+      },
+    },
   ],
 };
