@@ -7,7 +7,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-typegen",
       options: {
-        outputPath: `@types/gatsby-types.d.ts`,
+        outputPath: `types/gatsby-types.d.ts`,
       },
     },
     {

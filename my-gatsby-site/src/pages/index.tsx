@@ -1,13 +1,26 @@
 import React from "react";
-import { Link } from "gatsby";
+import { graphql } from "gatsby";
 
-const IndexPage: React.FC = () => {
+const IndexPage: React.FC<{ data: GatsbyTypes.IndexPageQuery }> = ({
+  data,
+}) => {
   return (
     <div>
-      <p>Hello Gatsby</p>
-      <Link to="/about">Link to About</Link>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );
 };
+
+export const query = graphql`
+  query IndexPage {
+    allFeedHatena {
+      nodes {
+        title
+        link
+        pubDate
+      }
+    }
+  }
+`;
 
 export default IndexPage;
