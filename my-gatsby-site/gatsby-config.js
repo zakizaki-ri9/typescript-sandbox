@@ -4,7 +4,12 @@ module.exports = {
     description: "Hello Gatsby",
   },
   plugins: [
-    "gatsby-plugin-typegen",
+    {
+      resolve: "gatsby-plugin-typegen",
+      options: {
+        outputPath: `@types/gatsby-types.d.ts`,
+      },
+    },
     {
       resolve: "gatsby-plugin-eslint",
       options: {

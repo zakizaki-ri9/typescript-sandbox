@@ -13,6 +13,12 @@
     "emitDecoratorMetadata": true,
     "noEmit": true,
     "skipLibCheck": true,
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "baseUrl": "./",
+    "paths": {
+      "*": [
+        "@types/*"
+      ],
+    }
   }
 }
