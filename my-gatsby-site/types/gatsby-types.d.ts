@@ -713,6 +713,14 @@ type File = Node & {
   readonly birthtime: Maybe<Scalars['Date']>;
   /** @deprecated Use `birthTime` instead */
   readonly birthtimeMs: Maybe<Scalars['Float']>;
+  readonly blksize: Maybe<Scalars['Int']>;
+  readonly blocks: Maybe<Scalars['Int']>;
+  /** Copy file to static directory and return public url to it */
+  readonly publicURL: Maybe<Scalars['String']>;
+  /** Returns all children nodes filtered by type WorksYaml */
+  readonly childrenWorksYaml: Maybe<ReadonlyArray<Maybe<WorksYaml>>>;
+  /** Returns the first child node of type WorksYaml or null if there are no children of given type on this node */
+  readonly childWorksYaml: Maybe<WorksYaml>;
   readonly id: Scalars['ID'];
   readonly parent: Maybe<Node>;
   readonly children: ReadonlyArray<Node>;
@@ -834,6 +842,98 @@ type FileFieldsEnum =
   | 'ctime'
   | 'birthtime'
   | 'birthtimeMs'
+  | 'blksize'
+  | 'blocks'
+  | 'publicURL'
+  | 'childrenWorksYaml'
+  | 'childrenWorksYaml.id'
+  | 'childrenWorksYaml.parent.id'
+  | 'childrenWorksYaml.parent.parent.id'
+  | 'childrenWorksYaml.parent.parent.children'
+  | 'childrenWorksYaml.parent.children'
+  | 'childrenWorksYaml.parent.children.id'
+  | 'childrenWorksYaml.parent.children.children'
+  | 'childrenWorksYaml.parent.internal.content'
+  | 'childrenWorksYaml.parent.internal.contentDigest'
+  | 'childrenWorksYaml.parent.internal.description'
+  | 'childrenWorksYaml.parent.internal.fieldOwners'
+  | 'childrenWorksYaml.parent.internal.ignoreType'
+  | 'childrenWorksYaml.parent.internal.mediaType'
+  | 'childrenWorksYaml.parent.internal.owner'
+  | 'childrenWorksYaml.parent.internal.type'
+  | 'childrenWorksYaml.children'
+  | 'childrenWorksYaml.children.id'
+  | 'childrenWorksYaml.children.parent.id'
+  | 'childrenWorksYaml.children.parent.children'
+  | 'childrenWorksYaml.children.children'
+  | 'childrenWorksYaml.children.children.id'
+  | 'childrenWorksYaml.children.children.children'
+  | 'childrenWorksYaml.children.internal.content'
+  | 'childrenWorksYaml.children.internal.contentDigest'
+  | 'childrenWorksYaml.children.internal.description'
+  | 'childrenWorksYaml.children.internal.fieldOwners'
+  | 'childrenWorksYaml.children.internal.ignoreType'
+  | 'childrenWorksYaml.children.internal.mediaType'
+  | 'childrenWorksYaml.children.internal.owner'
+  | 'childrenWorksYaml.children.internal.type'
+  | 'childrenWorksYaml.internal.content'
+  | 'childrenWorksYaml.internal.contentDigest'
+  | 'childrenWorksYaml.internal.description'
+  | 'childrenWorksYaml.internal.fieldOwners'
+  | 'childrenWorksYaml.internal.ignoreType'
+  | 'childrenWorksYaml.internal.mediaType'
+  | 'childrenWorksYaml.internal.owner'
+  | 'childrenWorksYaml.internal.type'
+  | 'childrenWorksYaml.slug'
+  | 'childrenWorksYaml.title'
+  | 'childrenWorksYaml.imageUrl'
+  | 'childrenWorksYaml.roles'
+  | 'childrenWorksYaml.description'
+  | 'childrenWorksYaml.gatsbyPath'
+  | 'childWorksYaml.id'
+  | 'childWorksYaml.parent.id'
+  | 'childWorksYaml.parent.parent.id'
+  | 'childWorksYaml.parent.parent.children'
+  | 'childWorksYaml.parent.children'
+  | 'childWorksYaml.parent.children.id'
+  | 'childWorksYaml.parent.children.children'
+  | 'childWorksYaml.parent.internal.content'
+  | 'childWorksYaml.parent.internal.contentDigest'
+  | 'childWorksYaml.parent.internal.description'
+  | 'childWorksYaml.parent.internal.fieldOwners'
+  | 'childWorksYaml.parent.internal.ignoreType'
+  | 'childWorksYaml.parent.internal.mediaType'
+  | 'childWorksYaml.parent.internal.owner'
+  | 'childWorksYaml.parent.internal.type'
+  | 'childWorksYaml.children'
+  | 'childWorksYaml.children.id'
+  | 'childWorksYaml.children.parent.id'
+  | 'childWorksYaml.children.parent.children'
+  | 'childWorksYaml.children.children'
+  | 'childWorksYaml.children.children.id'
+  | 'childWorksYaml.children.children.children'
+  | 'childWorksYaml.children.internal.content'
+  | 'childWorksYaml.children.internal.contentDigest'
+  | 'childWorksYaml.children.internal.description'
+  | 'childWorksYaml.children.internal.fieldOwners'
+  | 'childWorksYaml.children.internal.ignoreType'
+  | 'childWorksYaml.children.internal.mediaType'
+  | 'childWorksYaml.children.internal.owner'
+  | 'childWorksYaml.children.internal.type'
+  | 'childWorksYaml.internal.content'
+  | 'childWorksYaml.internal.contentDigest'
+  | 'childWorksYaml.internal.description'
+  | 'childWorksYaml.internal.fieldOwners'
+  | 'childWorksYaml.internal.ignoreType'
+  | 'childWorksYaml.internal.mediaType'
+  | 'childWorksYaml.internal.owner'
+  | 'childWorksYaml.internal.type'
+  | 'childWorksYaml.slug'
+  | 'childWorksYaml.title'
+  | 'childWorksYaml.imageUrl'
+  | 'childWorksYaml.roles'
+  | 'childWorksYaml.description'
+  | 'childWorksYaml.gatsbyPath'
   | 'id'
   | 'parent.id'
   | 'parent.parent.id'
@@ -953,6 +1053,11 @@ type FileFilterInput = {
   readonly ctime: Maybe<DateQueryOperatorInput>;
   readonly birthtime: Maybe<DateQueryOperatorInput>;
   readonly birthtimeMs: Maybe<FloatQueryOperatorInput>;
+  readonly blksize: Maybe<IntQueryOperatorInput>;
+  readonly blocks: Maybe<IntQueryOperatorInput>;
+  readonly publicURL: Maybe<StringQueryOperatorInput>;
+  readonly childrenWorksYaml: Maybe<WorksYamlFilterListInput>;
+  readonly childWorksYaml: Maybe<WorksYamlFilterInput>;
   readonly id: Maybe<StringQueryOperatorInput>;
   readonly parent: Maybe<NodeFilterInput>;
   readonly children: Maybe<NodeFilterListInput>;
@@ -1056,6 +1161,8 @@ type Query = {
   readonly allSite: SiteConnection;
   readonly sitePage: Maybe<SitePage>;
   readonly allSitePage: SitePageConnection;
+  readonly worksYaml: Maybe<WorksYaml>;
+  readonly allWorksYaml: WorksYamlConnection;
   readonly feedHatenaMeta: Maybe<FeedHatenaMeta>;
   readonly allFeedHatenaMeta: FeedHatenaMetaConnection;
   readonly feedHatena: Maybe<FeedHatena>;
@@ -1099,6 +1206,11 @@ type Query_fileArgs = {
   ctime: Maybe<DateQueryOperatorInput>;
   birthtime: Maybe<DateQueryOperatorInput>;
   birthtimeMs: Maybe<FloatQueryOperatorInput>;
+  blksize: Maybe<IntQueryOperatorInput>;
+  blocks: Maybe<IntQueryOperatorInput>;
+  publicURL: Maybe<StringQueryOperatorInput>;
+  childrenWorksYaml: Maybe<WorksYamlFilterListInput>;
+  childWorksYaml: Maybe<WorksYamlFilterInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
@@ -1194,6 +1306,7 @@ type Query_sitePageArgs = {
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
   isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
+  context: Maybe<SitePageContextFilterInput>;
   pluginCreator: Maybe<SitePluginFilterInput>;
   pluginCreatorId: Maybe<StringQueryOperatorInput>;
   componentPath: Maybe<StringQueryOperatorInput>;
@@ -1203,6 +1316,28 @@ type Query_sitePageArgs = {
 type Query_allSitePageArgs = {
   filter: Maybe<SitePageFilterInput>;
   sort: Maybe<SitePageSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+type Query_worksYamlArgs = {
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+  slug: Maybe<StringQueryOperatorInput>;
+  title: Maybe<StringQueryOperatorInput>;
+  imageUrl: Maybe<StringQueryOperatorInput>;
+  roles: Maybe<StringQueryOperatorInput>;
+  description: Maybe<StringQueryOperatorInput>;
+  gatsbyPath: Maybe<StringQueryOperatorInput>;
+};
+
+
+type Query_allWorksYamlArgs = {
+  filter: Maybe<WorksYamlFilterInput>;
+  sort: Maybe<WorksYamlSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -1619,6 +1754,7 @@ type SitePage = Node & {
   readonly children: ReadonlyArray<Node>;
   readonly internal: Internal;
   readonly isCreatedByStatefulCreatePages: Maybe<Scalars['Boolean']>;
+  readonly context: Maybe<SitePageContext>;
   readonly pluginCreator: Maybe<SitePlugin>;
   readonly pluginCreatorId: Maybe<Scalars['String']>;
   readonly componentPath: Maybe<Scalars['String']>;
@@ -1643,6 +1779,26 @@ type SitePageConnection_groupArgs = {
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
   field: SitePageFieldsEnum;
+};
+
+type SitePageContext = {
+  readonly id: Maybe<Scalars['String']>;
+  readonly slug: Maybe<Scalars['String']>;
+  readonly _xparams: Maybe<SitePageContext_xparams>;
+};
+
+type SitePageContext_xparams = {
+  readonly slug: Maybe<Scalars['String']>;
+};
+
+type SitePageContext_xparamsFilterInput = {
+  readonly slug: Maybe<StringQueryOperatorInput>;
+};
+
+type SitePageContextFilterInput = {
+  readonly id: Maybe<StringQueryOperatorInput>;
+  readonly slug: Maybe<StringQueryOperatorInput>;
+  readonly _xparams: Maybe<SitePageContext_xparamsFilterInput>;
 };
 
 type SitePageEdge = {
@@ -1744,6 +1900,9 @@ type SitePageFieldsEnum =
   | 'internal.owner'
   | 'internal.type'
   | 'isCreatedByStatefulCreatePages'
+  | 'context.id'
+  | 'context.slug'
+  | 'context._xparams.slug'
   | 'pluginCreator.id'
   | 'pluginCreator.parent.id'
   | 'pluginCreator.parent.parent.id'
@@ -1829,6 +1988,7 @@ type SitePageFilterInput = {
   readonly children: Maybe<NodeFilterListInput>;
   readonly internal: Maybe<InternalFilterInput>;
   readonly isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
+  readonly context: Maybe<SitePageContextFilterInput>;
   readonly pluginCreator: Maybe<SitePluginFilterInput>;
   readonly pluginCreatorId: Maybe<StringQueryOperatorInput>;
   readonly componentPath: Maybe<StringQueryOperatorInput>;
@@ -2172,6 +2332,176 @@ type StringQueryOperatorInput = {
   readonly glob: Maybe<Scalars['String']>;
 };
 
+type WorksYaml = Node & {
+  readonly id: Scalars['ID'];
+  readonly parent: Maybe<Node>;
+  readonly children: ReadonlyArray<Node>;
+  readonly internal: Internal;
+  readonly slug: Maybe<Scalars['String']>;
+  readonly title: Maybe<Scalars['String']>;
+  readonly imageUrl: Maybe<Scalars['String']>;
+  readonly roles: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly description: Maybe<Scalars['String']>;
+  readonly gatsbyPath: Maybe<Scalars['String']>;
+};
+
+
+type WorksYaml_gatsbyPathArgs = {
+  filePath: Maybe<Scalars['String']>;
+};
+
+type WorksYamlConnection = {
+  readonly totalCount: Scalars['Int'];
+  readonly edges: ReadonlyArray<WorksYamlEdge>;
+  readonly nodes: ReadonlyArray<WorksYaml>;
+  readonly pageInfo: PageInfo;
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly group: ReadonlyArray<WorksYamlGroupConnection>;
+};
+
+
+type WorksYamlConnection_distinctArgs = {
+  field: WorksYamlFieldsEnum;
+};
+
+
+type WorksYamlConnection_groupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: WorksYamlFieldsEnum;
+};
+
+type WorksYamlEdge = {
+  readonly next: Maybe<WorksYaml>;
+  readonly node: WorksYaml;
+  readonly previous: Maybe<WorksYaml>;
+};
+
+type WorksYamlFieldsEnum =
+  | 'id'
+  | 'parent.id'
+  | 'parent.parent.id'
+  | 'parent.parent.parent.id'
+  | 'parent.parent.parent.children'
+  | 'parent.parent.children'
+  | 'parent.parent.children.id'
+  | 'parent.parent.children.children'
+  | 'parent.parent.internal.content'
+  | 'parent.parent.internal.contentDigest'
+  | 'parent.parent.internal.description'
+  | 'parent.parent.internal.fieldOwners'
+  | 'parent.parent.internal.ignoreType'
+  | 'parent.parent.internal.mediaType'
+  | 'parent.parent.internal.owner'
+  | 'parent.parent.internal.type'
+  | 'parent.children'
+  | 'parent.children.id'
+  | 'parent.children.parent.id'
+  | 'parent.children.parent.children'
+  | 'parent.children.children'
+  | 'parent.children.children.id'
+  | 'parent.children.children.children'
+  | 'parent.children.internal.content'
+  | 'parent.children.internal.contentDigest'
+  | 'parent.children.internal.description'
+  | 'parent.children.internal.fieldOwners'
+  | 'parent.children.internal.ignoreType'
+  | 'parent.children.internal.mediaType'
+  | 'parent.children.internal.owner'
+  | 'parent.children.internal.type'
+  | 'parent.internal.content'
+  | 'parent.internal.contentDigest'
+  | 'parent.internal.description'
+  | 'parent.internal.fieldOwners'
+  | 'parent.internal.ignoreType'
+  | 'parent.internal.mediaType'
+  | 'parent.internal.owner'
+  | 'parent.internal.type'
+  | 'children'
+  | 'children.id'
+  | 'children.parent.id'
+  | 'children.parent.parent.id'
+  | 'children.parent.parent.children'
+  | 'children.parent.children'
+  | 'children.parent.children.id'
+  | 'children.parent.children.children'
+  | 'children.parent.internal.content'
+  | 'children.parent.internal.contentDigest'
+  | 'children.parent.internal.description'
+  | 'children.parent.internal.fieldOwners'
+  | 'children.parent.internal.ignoreType'
+  | 'children.parent.internal.mediaType'
+  | 'children.parent.internal.owner'
+  | 'children.parent.internal.type'
+  | 'children.children'
+  | 'children.children.id'
+  | 'children.children.parent.id'
+  | 'children.children.parent.children'
+  | 'children.children.children'
+  | 'children.children.children.id'
+  | 'children.children.children.children'
+  | 'children.children.internal.content'
+  | 'children.children.internal.contentDigest'
+  | 'children.children.internal.description'
+  | 'children.children.internal.fieldOwners'
+  | 'children.children.internal.ignoreType'
+  | 'children.children.internal.mediaType'
+  | 'children.children.internal.owner'
+  | 'children.children.internal.type'
+  | 'children.internal.content'
+  | 'children.internal.contentDigest'
+  | 'children.internal.description'
+  | 'children.internal.fieldOwners'
+  | 'children.internal.ignoreType'
+  | 'children.internal.mediaType'
+  | 'children.internal.owner'
+  | 'children.internal.type'
+  | 'internal.content'
+  | 'internal.contentDigest'
+  | 'internal.description'
+  | 'internal.fieldOwners'
+  | 'internal.ignoreType'
+  | 'internal.mediaType'
+  | 'internal.owner'
+  | 'internal.type'
+  | 'slug'
+  | 'title'
+  | 'imageUrl'
+  | 'roles'
+  | 'description'
+  | 'gatsbyPath';
+
+type WorksYamlFilterInput = {
+  readonly id: Maybe<StringQueryOperatorInput>;
+  readonly parent: Maybe<NodeFilterInput>;
+  readonly children: Maybe<NodeFilterListInput>;
+  readonly internal: Maybe<InternalFilterInput>;
+  readonly slug: Maybe<StringQueryOperatorInput>;
+  readonly title: Maybe<StringQueryOperatorInput>;
+  readonly imageUrl: Maybe<StringQueryOperatorInput>;
+  readonly roles: Maybe<StringQueryOperatorInput>;
+  readonly description: Maybe<StringQueryOperatorInput>;
+  readonly gatsbyPath: Maybe<StringQueryOperatorInput>;
+};
+
+type WorksYamlFilterListInput = {
+  readonly elemMatch: Maybe<WorksYamlFilterInput>;
+};
+
+type WorksYamlGroupConnection = {
+  readonly totalCount: Scalars['Int'];
+  readonly edges: ReadonlyArray<WorksYamlEdge>;
+  readonly nodes: ReadonlyArray<WorksYaml>;
+  readonly pageInfo: PageInfo;
+  readonly field: Scalars['String'];
+  readonly fieldValue: Maybe<Scalars['String']>;
+};
+
+type WorksYamlSortInput = {
+  readonly fields: Maybe<ReadonlyArray<Maybe<WorksYamlFieldsEnum>>>;
+  readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
+};
+
 type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2181,5 +2511,12 @@ type IndexPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type IndexPageQuery = { readonly allFeedHatena: { readonly nodes: ReadonlyArray<Pick<FeedHatena, 'title' | 'link' | 'pubDate'>> } };
+
+type WorkPageQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+type WorkPageQuery = { readonly worksYaml: Maybe<Pick<WorksYaml, 'slug' | 'title' | 'description' | 'imageUrl'>> };
 
 }

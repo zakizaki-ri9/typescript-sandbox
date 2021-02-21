@@ -1,0 +1,18 @@
+- slug: writing
+  title: 執筆Days
+  imageUrl: '/work.png'
+  roles:
+    - WordPress
+    - React
+  description: |-
+    執筆の日々。
+    ゴールが見えない。
+- slug: deadline
+  title: 期日
+  imageUrl: '/work.png'
+  roles:
+    - WordPress
+    - React
+  description: |-
+    締め切りは減るだけで増えません。
+    おかしくないですか？
