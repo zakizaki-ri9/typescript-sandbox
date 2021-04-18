@@ -31,5 +31,16 @@ module.exports = {
         parser: "@typescript-eslint/parser",
       },
     },
+    {
+      files: ["*.d.ts"],
+      extends: ["plugin:@typescript-eslint/recommended"],
+      plugins: ["@typescript-eslint"],
+      parserOptions: {
+        parser: "@typescript-eslint/parser",
+      },
+      rules: {
+        "@typescript-eslint/ban-types": "warn",
+      },
+    },
   ],
 };
