@@ -6,6 +6,7 @@
     >
       Button
     </button>
+    <router-view />
   </div>
 </template>
 
