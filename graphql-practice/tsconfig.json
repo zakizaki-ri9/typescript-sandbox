@@ -1,0 +1,14 @@
+{
+  "extends": "@tsconfig/node16/tsconfig.json",
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["@types/node"],
+    "outDir": "dist",
+    "sourceMap": true
+  },
+  "include": ["src/**/*"]
+}
