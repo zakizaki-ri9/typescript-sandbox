@@ -15,7 +15,7 @@ npm run build
 ## Development
 
 ```bash
-npm run start
+npm run dev
 ```
 
 ## Production

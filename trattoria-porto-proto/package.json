@@ -6,6 +6,7 @@
     "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
+    "nuxt-windicss": "^2.2.7",
     "nuxt3": "latest"
   }
 }
