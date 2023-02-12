@@ -55,7 +55,7 @@
     "ts-jest": "^26.5.0",
     "tslib": "^2.0.0",
     "typescript": "^3.9.3",
-    "web-ext": "^5.5.0"
+    "web-ext": "^7.5.0"
   },
   "dependencies": {
     "sirv-cli": "^1.0.0"
