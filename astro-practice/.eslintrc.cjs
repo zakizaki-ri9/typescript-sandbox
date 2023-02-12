@@ -2,7 +2,14 @@
  * @type {import("eslint").ESLint.ConfigData}
  */
 module.exports = {
-  extends: ["eslint:recommended", "plugin:astro/recommended", "prettier"],
+  extends: [
+    "plugin:astro/recommended",
+    "plugin:vue/vue3-recommended",
+    "@vue/typescript/recommended",
+    "eslint:recommended",
+    "prettier",
+  ],
+  plugins: ["@typescript-eslint", "vue"],
   root: true,
   env: {
     browser: true,
@@ -12,13 +19,10 @@ module.exports = {
     sourceType: "module",
     ecmaVersion: "latest",
   },
-  rules: {
-    // "pre"
-  },
   overrides: [
     {
       // Define the configuration for `.astro` file.
-      files: ["*.astro"],
+      files: ["**/*.astro"],
       // Allows Astro components to be parsed.
       parser: "astro-eslint-parser",
       // Parse the script in `.astro` as TypeScript by adding the following configuration.
@@ -31,6 +35,5 @@ module.exports = {
         "astro/semi": ["error", "never"],
       },
     },
-    // ...
   ],
 }
