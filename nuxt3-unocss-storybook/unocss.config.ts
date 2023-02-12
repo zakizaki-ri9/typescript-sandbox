@@ -3,7 +3,7 @@ import {
   presetIcons,
   transformerDirectives,
 } from 'unocss'
-import type { Rule } from 'unocss'
+import type { Rule, UserConfig } from 'unocss'
 import mdi from '@iconify-json/mdi/icons.json'
 
 const SPACINGS = [...Array(20)].map((_, i) => (i*4)+4);
@@ -26,18 +26,16 @@ const SPACING_RULES: Rule[] = SPACINGS.flatMap(spacing => {
   ]
 })
 
-export default defineConfig({
+export const config = {
   presets: [
     presetIcons({
       collections: {
         mdi: () => mdi,
-      }
+      },
     }),
   ],
-  rules: [
-    ...SPACING_RULES
-  ],
-  transformers: [
-    transformerDirectives(),
-  ]
-})
+  rules: [...SPACING_RULES],
+  transformers: [transformerDirectives()],
+} as UserConfig;
+
+export default defineConfig({ ...config });
