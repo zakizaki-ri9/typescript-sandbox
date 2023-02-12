@@ -13,7 +13,9 @@
     "fix:all": "eslint --fix src/ --ext .js,.ts,.astro && prettier --write ."
   },
   "dependencies": {
-    "astro": "^2.0.6"
+    "@astrojs/vue": "^2.0.1",
+    "astro": "^2.0.10",
+    "vue": "^3.2.47"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^5.51.0",
