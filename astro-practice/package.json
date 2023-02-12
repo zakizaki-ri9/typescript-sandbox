@@ -14,7 +14,8 @@
   "dependencies": {
     "@astrojs/vue": "^2.0.1",
     "astro": "^2.0.10",
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "yup": "^1.0.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.51.0",
@@ -27,6 +28,7 @@
     "eslint-plugin-vue": "^9.9.0",
     "prettier": "^2.8.4",
     "prettier-plugin-astro": "^0.8.0",
-    "sass": "^1.58.0"
+    "sass": "^1.58.0",
+    "vue-yup-form": "^1.0.4"
   }
 }
