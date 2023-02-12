@@ -9,8 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint src --ext .js,.ts,.astro,.vue",
-    "lint:fix": "eslint --fix src --ext .js,.ts,.astro,.vue && prettier --write src",
-    "fix:all": "eslint --fix src --ext .js,.ts,.astro,.vue && prettier --write ."
+    "lint:fix": "eslint --fix src --ext .js,.ts,.astro,.vue && prettier --write '**/*.{js,ts,astro,vue}'"
   },
   "dependencies": {
     "@astrojs/vue": "^2.0.1",
