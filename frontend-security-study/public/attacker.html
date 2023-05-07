@@ -5,7 +5,9 @@
     <script>
       function load() {
         // ユーザー情報を読み取る
-        const userInfo = frm.document.querySelector("#user_info"); // ユーザー情報の文字列をログに出力 console.log(userInfo.textContent);
+        // http://site.example:3000 以外からのアクセスだと CORS エラーとなる
+        const userInfo = frm.document.querySelector("#user_info");
+        console.log(userInfo.textContent);
       }
     </script>
   </head>
