@@ -3,8 +3,19 @@ import { IncomingHttpHeaders } from "http";
 
 const router = express.Router();
 
+const ALLOW_LIST = ["http://localhost:3000", "http://site.example:3000"];
+
 router.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  // すべてのオリジンからのアクセスを許容する
+  // res.header("Access-Control-Allow-Origin", "*");
+
+  // http://localhost:3000 からのアクセスは許容するが http://site.example:3000 からのアクセスは許容できない
+  // res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+
+  // Originヘッダが存在している、かつリクエスト許可するリスト内にOriginヘッダの値が含まれているかチェック
+  if (req.headers.origin && ALLOW_LIST.includes(req.headers.origin)) {
+    res.header("Access-Control-Allow-Origin", req.headers.origin);
+  }
   // プリフライトリクエスト時送信可能なヘッダーを設定
   // ex. await fetch("http://site.example:3000/api", { headers: { "X-Token": "test" }});
   if (req.method === "OPTIONS") {
