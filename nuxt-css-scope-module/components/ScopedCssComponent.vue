@@ -1,13 +1,14 @@
 <template>
-  <div class="container">
+  <div class="flex">
     <div>test</div>
     <span>span</span>
-    <span class="label">label</span>
+    <span class="label underline">label</span>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.container {
+// app.vue, tailwind.css のスタイルを継承＋上書きする
+.flex {
   font-size: 16px;
   display: flex;
   justify-content: center;
@@ -19,6 +20,10 @@
 
   .label {
     font-size: 14px;
+  }
+
+  .underline {
+    text-decoration-line: unset;
   }
 }
 </style>
